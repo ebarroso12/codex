@@ -8,7 +8,7 @@ import { RolesGuard } from "../auth/roles.guard";
 @Controller("users")
 export class UsersController {
   @Get()
-  @Roles(Role.ADMIN, Role.MANAGER)
+  @Roles(Role.ADMIN, Role.SUPERVISOR)
   list() {
     return { data: [], module: "users" };
   }

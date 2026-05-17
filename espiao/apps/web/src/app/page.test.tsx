@@ -7,7 +7,8 @@ describe("HomePage", () => {
   it("renders the dashboard shell", () => {
     const html = renderToString(<HomePage />);
 
-    expect(html).toContain("Auditoria de atendimentos");
-    expect(html).toContain("Cloud API only");
+    expect(html).toContain("Dashboard de auditoria WhatsApp");
+    expect(html).toContain("Conversas recentes");
+    expect(html).toContain("Alertas IA");
   });
 });

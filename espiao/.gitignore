@@ -1,8 +1,11 @@
 node_modules
+.claude
 .next
 dist
 coverage
 .env
 .env.local
 *.log
+*.tsbuildinfo
+.dev-logs
 packages/database/generated

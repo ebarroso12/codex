@@ -10,6 +10,8 @@ import { HealthController } from "./health.controller";
 import { MessagesModule } from "./messages/messages.module";
 import { PatientsModule } from "./patients/patients.module";
 import { PrismaModule } from "./prisma/prisma.module";
+import { RealtimeModule } from "./realtime/realtime.module";
+import { SystemModule } from "./system/system.module";
 import { ReportsModule } from "./reports/reports.module";
 import { UsersModule } from "./users/users.module";
 import { validateEnv } from "./shared/config/env.validation";
@@ -21,17 +23,23 @@ import { WhatsappModule } from "./whatsapp/whatsapp.module";
       isGlobal: true,
       validate: validateEnv
     }),
-    BullModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        connection: {
-          host: config.get<string>("REDIS_HOST", "localhost"),
-          port: config.get<number>("REDIS_PORT", 6379),
-          password: config.get<string>("REDIS_PASSWORD") || undefined
-        }
-      })
-    }),
+    ...(process.env.NODE_ENV === "test"
+      ? []
+      : [
+          BullModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (config: ConfigService) => ({
+              connection: {
+                host: config.get<string>("REDIS_HOST", "localhost"),
+                port: config.get<number>("REDIS_PORT", 6379),
+                password: config.get<string>("REDIS_PASSWORD") || undefined
+              }
+            })
+          })
+        ]),
+    RealtimeModule,
+    SystemModule,
     PrismaModule,
     AuthModule,
     UsersModule,

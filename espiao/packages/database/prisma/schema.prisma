@@ -9,7 +9,7 @@ datasource db {
 
 enum Role {
   ADMIN
-  MANAGER
+  SUPERVISOR
   AUDITOR
   AGENT
 }
@@ -48,6 +48,7 @@ model User {
   email        String     @unique
   name         String
   passwordHash String
+  refreshTokenHash String?
   role         Role       @default(AUDITOR)
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
@@ -82,6 +83,7 @@ model Conversation {
   patientId                String
   employeeId               String?
   status                   ConversationStatus @default(OPEN)
+  accountPhoneNumberId     String?
   startedAt                DateTime           @default(now())
   closedAt                 DateTime?
   patient                  Patient            @relation(fields: [patientId], references: [id])

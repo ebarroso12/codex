@@ -4,4 +4,5 @@ export type CurrentUser = {
   sub: string;
   email: string;
   role: Role;
+  tokenType?: "access" | "refresh";
 };
