@@ -19,6 +19,7 @@ const envSchema = z.object({
   META_WHATSAPP_VERIFY_TOKEN: z.string().optional(),
   META_WHATSAPP_APP_SECRET: z.string().optional(),
   ENABLE_WEBHOOK_RAW_LOG: z.enum(["true", "false"]).default("false"),
+  WHATSAPP_PROVIDER: z.enum(["meta_cloud_api", "session_provider"]).default("meta_cloud_api"),
   OPENAI_API_KEY: z.string().optional(),
   OPENAI_MODEL: z.string().default("gpt-4.1-mini")
 });

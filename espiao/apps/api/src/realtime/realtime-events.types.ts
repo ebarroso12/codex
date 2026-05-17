@@ -31,9 +31,35 @@ export type AlertCreatedPayload = {
   title: string;
 };
 
+export type WhatsappSessionCreatedPayload = {
+  sessionId: string;
+  provider: string;
+  createdAt: string;
+};
+
+export type WhatsappSessionQrUpdatedPayload = {
+  sessionId: string;
+  // qrCode intentionally omitted — client fetches via GET /whatsapp/sessions/:id/qrcode
+};
+
+export type WhatsappSessionConnectedPayload = {
+  sessionId: string;
+  phoneNumber: string | null;
+  connectedAt: string;
+};
+
+export type WhatsappSessionDisconnectedPayload = {
+  sessionId: string;
+  disconnectedAt: string;
+};
+
 export type RealtimeEventMap = {
   "message.created": RealtimeEnvelope<MessageCreatedPayload>;
   "conversation.created": RealtimeEnvelope<ConversationCreatedPayload>;
   "patient.created": RealtimeEnvelope<PatientCreatedPayload>;
   "alert.created": RealtimeEnvelope<AlertCreatedPayload>;
+  "whatsapp.session.created": RealtimeEnvelope<WhatsappSessionCreatedPayload>;
+  "whatsapp.session.qr_updated": RealtimeEnvelope<WhatsappSessionQrUpdatedPayload>;
+  "whatsapp.session.connected": RealtimeEnvelope<WhatsappSessionConnectedPayload>;
+  "whatsapp.session.disconnected": RealtimeEnvelope<WhatsappSessionDisconnectedPayload>;
 };

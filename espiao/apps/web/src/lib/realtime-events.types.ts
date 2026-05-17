@@ -19,3 +19,24 @@ export type ConversationCreatedPayload = {
   accountPhoneNumberId: string;
   startedAt: string;
 };
+
+export type WhatsappSessionCreatedPayload = {
+  sessionId: string;
+  provider: string;
+  createdAt: string;
+};
+
+export type WhatsappSessionQrUpdatedPayload = {
+  sessionId: string;
+};
+
+export type WhatsappSessionConnectedPayload = {
+  sessionId: string;
+  phoneNumber: string | null;
+  connectedAt: string;
+};
+
+export type WhatsappSessionDisconnectedPayload = {
+  sessionId: string;
+  disconnectedAt: string;
+};

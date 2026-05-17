@@ -43,6 +43,19 @@ enum AnalysisStatus {
   FAILED
 }
 
+enum WhatsappProviderType {
+  META_CLOUD_API
+  SESSION_PROVIDER
+}
+
+enum WhatsappSessionStatus {
+  PENDING
+  QR_PENDING
+  CONNECTED
+  DISCONNECTED
+  FAILED
+}
+
 model User {
   id           String     @id @default(uuid())
   email        String     @unique
@@ -141,4 +154,19 @@ model AuditLog {
   metadata  Json?
   user      User?    @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+}
+
+model WhatsappSession {
+  id                String                 @id @default(uuid())
+  provider          WhatsappProviderType
+  status            WhatsappSessionStatus  @default(PENDING)
+  phoneNumber       String?
+  qrCode            String?
+  connectedAt       DateTime?
+  disconnectedAt    DateTime?
+  externalSessionId String?
+  tenantId          String?
+  metadata          Json?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
 }
