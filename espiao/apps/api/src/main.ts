@@ -20,7 +20,10 @@ async function bootstrap() {
     })
   );
 
-  const port = config.get<number>("API_PORT", 3001);
+  // Railway injects PORT; fall back to API_PORT for local dev
+  const port = process.env.PORT
+    ? parseInt(process.env.PORT, 10)
+    : config.get<number>("API_PORT", 3001);
   await app.listen(port);
 }
 

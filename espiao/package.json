@@ -13,6 +13,8 @@
     "dev:api": "npm run start:dev -w apps/api",
     "build:web": "npm run build -w apps/web",
     "start:web": "npm run start -w apps/web",
+    "build:api": "npm run build -w apps/api",
+    "start:prod:api": "npm run start:prod -w apps/api",
     "build": "npm run build --workspaces",
     "lint": "eslint apps packages --ext .ts,.tsx",
     "typecheck": "tsc -b",
