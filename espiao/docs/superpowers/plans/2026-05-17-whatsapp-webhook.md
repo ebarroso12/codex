@@ -158,7 +158,7 @@ const envSchema = z.object({
   META_WHATSAPP_PHONE_NUMBER_ID: z.string().optional(),
   META_WHATSAPP_BUSINESS_ACCOUNT_ID: z.string().optional(),
   META_WHATSAPP_ACCESS_TOKEN: z.string().optional(),
-  META_WHATSAPP_WEBHOOK_VERIFY_TOKEN: z.string().optional(),
+  META_WHATSAPP_VERIFY_TOKEN: z.string().optional(),
   META_WHATSAPP_APP_SECRET: z.string().optional(),
   ENABLE_WEBHOOK_RAW_LOG: z.enum(["true", "false"]).default("false"),
   OPENAI_API_KEY: z.string().optional(),
@@ -661,7 +661,7 @@ export class WhatsappController {
     @Query("hub.challenge") challenge?: string
   ) {
     const expectedToken = this.config.get<string>(
-      "META_WHATSAPP_WEBHOOK_VERIFY_TOKEN"
+      "META_WHATSAPP_VERIFY_TOKEN"
     );
 
     if (mode === "subscribe" && token && token === expectedToken) {
@@ -976,7 +976,7 @@ describe("WhatsApp Webhook", () => {
   beforeAll(async () => {
     process.env.NODE_ENV = "test";
     process.env.META_WHATSAPP_APP_SECRET = TEST_SECRET;
-    process.env.META_WHATSAPP_WEBHOOK_VERIFY_TOKEN = TEST_VERIFY_TOKEN;
+    process.env.META_WHATSAPP_VERIFY_TOKEN = TEST_VERIFY_TOKEN;
 
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(PrismaService)

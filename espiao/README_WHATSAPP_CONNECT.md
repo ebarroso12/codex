@@ -81,7 +81,7 @@ Acesse https://developers.facebook.com/apps → seu aplicativo → WhatsApp → 
 | `META_WHATSAPP_PHONE_NUMBER_ID` | Painel WhatsApp → número adicionado → ID do número |
 | `META_WHATSAPP_BUSINESS_ACCOUNT_ID` | Painel WhatsApp → ID da conta comercial |
 | `META_WHATSAPP_APP_SECRET` | Configurações do aplicativo → Básico → Segredo do aplicativo |
-| `META_WHATSAPP_WEBHOOK_VERIFY_TOKEN` | Você define — qualquer string aleatória segura |
+| `META_WHATSAPP_VERIFY_TOKEN` | Você define — qualquer string aleatória segura |
 | `META_WHATSAPP_API_VERSION` | Use `v21.0` (ou versão mais recente disponível) |
 
 Gere o verify token com:
@@ -99,7 +99,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
    ```
    https://SUA-API.railway.app/whatsapp/webhook
    ```
-4. Token de verificação: o valor de `META_WHATSAPP_WEBHOOK_VERIFY_TOKEN`
+4. Token de verificação: o valor de `META_WHATSAPP_VERIFY_TOKEN`
 5. Clique em **Verificar e salvar**
    - A Meta enviará um GET com `hub.verify_token` — a API responderá com o challenge
 6. Após salvar, clique em **Gerenciar** ao lado de **Campos do webhook**
@@ -117,7 +117,7 @@ META_WHATSAPP_ACCESS_TOKEN=EAAxxxxxxxxxxxxxxx
 META_WHATSAPP_PHONE_NUMBER_ID=123456789012345
 META_WHATSAPP_BUSINESS_ACCOUNT_ID=987654321098765
 META_WHATSAPP_APP_SECRET=abc123def456...
-META_WHATSAPP_WEBHOOK_VERIFY_TOKEN=seu-token-aleatorio-aqui
+META_WHATSAPP_VERIFY_TOKEN=seu-token-aleatorio-aqui
 META_WHATSAPP_API_VERSION=v21.0
 ```
 

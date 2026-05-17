@@ -19,7 +19,7 @@ import { WhatsappWebhookService } from "./whatsapp-webhook.service";
 // isolation contexts. Providing explicit values is more reliable than env vars.
 const configValues: Record<string, string | number> = {
   META_WHATSAPP_APP_SECRET: "test-app-secret",
-  META_WHATSAPP_WEBHOOK_VERIFY_TOKEN: "test-verify-token",
+  META_WHATSAPP_VERIFY_TOKEN: "test-verify-token",
   ENABLE_WEBHOOK_RAW_LOG: "false",
   JWT_SECRET: "test-jwt-secret",
   JWT_EXPIRES_IN: "1h",

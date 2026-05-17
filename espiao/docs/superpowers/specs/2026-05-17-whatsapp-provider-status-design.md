@@ -45,7 +45,7 @@ Público (sem JWT). Retorna configuração atual sem expor valores dos secrets.
 - `configured`: todas as 4 vars obrigatórias presentes
 - `connected`: sempre `false` nesta etapa (validação real → POST /whatsapp/provider/verify, futuro)
 - `phoneNumberIdConfigured`: `META_WHATSAPP_PHONE_NUMBER_ID` presente
-- `webhookReady`: `META_WHATSAPP_WEBHOOK_VERIFY_TOKEN` AND `META_WHATSAPP_APP_SECRET` presentes
+- `webhookReady`: `META_WHATSAPP_VERIFY_TOKEN` AND `META_WHATSAPP_APP_SECRET` presentes
 - `missingEnv`: nomes das vars ausentes, sem valores
 
 ### requiredVars
@@ -54,7 +54,7 @@ Público (sem JWT). Retorna configuração atual sem expor valores dos secrets.
 const REQUIRED_VARS = [
   "META_WHATSAPP_ACCESS_TOKEN",
   "META_WHATSAPP_PHONE_NUMBER_ID",
-  "META_WHATSAPP_WEBHOOK_VERIFY_TOKEN",
+  "META_WHATSAPP_VERIFY_TOKEN",
   "META_WHATSAPP_APP_SECRET"
 ] as const;
 ```

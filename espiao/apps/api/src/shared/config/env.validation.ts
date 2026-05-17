@@ -16,7 +16,7 @@ const envSchema = z.object({
   META_WHATSAPP_PHONE_NUMBER_ID: z.string().optional(),
   META_WHATSAPP_BUSINESS_ACCOUNT_ID: z.string().optional(),
   META_WHATSAPP_ACCESS_TOKEN: z.string().optional(),
-  META_WHATSAPP_WEBHOOK_VERIFY_TOKEN: z.string().optional(),
+  META_WHATSAPP_VERIFY_TOKEN: z.string().optional(),
   META_WHATSAPP_APP_SECRET: z.string().optional(),
   ENABLE_WEBHOOK_RAW_LOG: z.enum(["true", "false"]).default("false"),
   OPENAI_API_KEY: z.string().optional(),

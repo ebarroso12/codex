@@ -36,7 +36,7 @@ export class WhatsappController {
     @Query("hub.challenge") challenge?: string
   ) {
     const expectedToken = this.config.get<string>(
-      "META_WHATSAPP_WEBHOOK_VERIFY_TOKEN"
+      "META_WHATSAPP_VERIFY_TOKEN"
     );
 
     if (mode === "subscribe" && token && token === expectedToken) {

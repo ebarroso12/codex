@@ -9,7 +9,7 @@ type SendTextMessageInput = {
 const REQUIRED_VARS = [
   "META_WHATSAPP_ACCESS_TOKEN",
   "META_WHATSAPP_PHONE_NUMBER_ID",
-  "META_WHATSAPP_WEBHOOK_VERIFY_TOKEN",
+  "META_WHATSAPP_VERIFY_TOKEN",
   "META_WHATSAPP_APP_SECRET"
 ] as const;
 
@@ -42,7 +42,7 @@ export class WhatsappCloudApiService {
         this.config.get<string>("META_WHATSAPP_PHONE_NUMBER_ID")
       ),
       webhookReady:
-        Boolean(this.config.get<string>("META_WHATSAPP_WEBHOOK_VERIFY_TOKEN")) &&
+        Boolean(this.config.get<string>("META_WHATSAPP_VERIFY_TOKEN")) &&
         Boolean(this.config.get<string>("META_WHATSAPP_APP_SECRET")),
       missingEnv: [...missingEnv] // names only, never values
     };
