@@ -9,3 +9,5 @@ coverage
 *.tsbuildinfo
 .dev-logs
 packages/database/generated
+espiao/.env.secrets.txt
+espiao/.env.secrets*
