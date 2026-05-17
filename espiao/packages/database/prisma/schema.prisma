@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  AUDITOR
+  AGENT
+}
+
+enum ConversationStatus {
+  OPEN
+  CLOSED
+  ESCALATED
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  AUDIO
+  VIDEO
+  DOCUMENT
+  INTERACTIVE
+  TEMPLATE
+  UNKNOWN
+}
+
+enum AnalysisStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  role         Role       @default(AUDITOR)
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+}
+
+model Employee {
+  id             String         @id @default(uuid())
+  name           String
+  externalRef    String?        @unique
+  roleTitle      String?
+  isActive       Boolean        @default(true)
+  conversations  Conversation[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Patient {
+  id             String         @id @default(uuid())
+  name           String?
+  phoneE164      String         @unique
+  externalRef    String?        @unique
+  conversations  Conversation[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Conversation {
+  id                       String             @id @default(uuid())
+  whatsappConversationId   String?            @unique
+  patientId                String
+  employeeId               String?
+  status                   ConversationStatus @default(OPEN)
+  startedAt                DateTime           @default(now())
+  closedAt                 DateTime?
+  patient                  Patient            @relation(fields: [patientId], references: [id])
+  employee                 Employee?          @relation(fields: [employeeId], references: [id])
+  messages                 Message[]
+  analyses                 AiAnalysis[]
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
+}
+
+model Message {
+  id                     String            @id @default(uuid())
+  conversationId         String
+  metaMessageId          String?           @unique
+  direction              MessageDirection
+  type                   MessageType       @default(TEXT)
+  text                   String?
+  payload                Json?
+  sentAt                 DateTime?
+  receivedAt             DateTime?
+  conversation           Conversation      @relation(fields: [conversationId], references: [id])
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+}
+
+model AiAnalysis {
+  id             String         @id @default(uuid())
+  conversationId String
+  model          String
+  status         AnalysisStatus @default(PENDING)
+  score          Int?
+  summary        String?
+  findings       Json?
+  error          String?
+  conversation   Conversation   @relation(fields: [conversationId], references: [id])
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Report {
+  id        String   @id @default(uuid())
+  title     String
+  filters   Json?
+  fileUrl   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
