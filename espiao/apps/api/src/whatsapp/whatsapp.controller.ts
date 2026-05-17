@@ -26,10 +26,7 @@ export class WhatsappController {
 
   @Get("provider")
   provider() {
-    return {
-      provider: this.whatsapp.getProviderName(),
-      unofficialAutomationAllowed: false
-    };
+    return this.whatsapp.getProviderStatus();
   }
 
   @Get("webhook")
