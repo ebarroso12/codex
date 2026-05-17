@@ -32,7 +32,8 @@ export function RealtimeDashboard({ initialConversations, initialActiveCount }: 
   const lastReconnectToastRef = useRef<number>(0);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
-  const socket = useSocket(apiUrl);
+  const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL ?? apiUrl;
+  const socket = useSocket(socketUrl);
 
   useEffect(() => {
     if (!socket) return;
