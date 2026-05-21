@@ -1,0 +1,4 @@
+interface:
+  display_name: "Medical App UI"
+  short_description: "Build medical service app UI"
+  default_prompt: "Use $medical-app-ui to build a patient-facing medical service page."
