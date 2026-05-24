@@ -1,0 +1,6 @@
+[Unit]
+Description=OpenClaw lightweight watchdog
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/openclaw-watchdog.sh

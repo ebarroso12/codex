@@ -1,0 +1,13 @@
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.bak
+*.key
+*.pem
+*.env
+*.env.*
+openclaw.json
+.openclaw/
+secrets/
+backups/
